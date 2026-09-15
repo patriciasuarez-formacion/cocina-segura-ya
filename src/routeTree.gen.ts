@@ -10,33 +10,142 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlumnoRouteImport } from './routes/alumno'
+import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
+import { Route as AlumnoAlmacenaRouteImport } from './routes/alumno.almacena'
+import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
+import { Route as AlumnoNormasRouteImport } from './routes/alumno.normas'
+import { Route as AlumnoPepsRouteImport } from './routes/alumno.peps'
+import { Route as AlumnoPracticaRouteImport } from './routes/alumno.practica'
+import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
+import { Route as AlumnoAprendeLeccionIdRouteImport } from './routes/alumno.aprende.$leccionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlumnoRoute = AlumnoRouteImport.update({
+  id: '/alumno',
+  path: '/alumno',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoAlmacenaRoute = AlumnoAlmacenaRouteImport.update({
+  id: '/almacena',
+  path: '/almacena',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoAprendeRoute = AlumnoAprendeRouteImport.update({
+  id: '/aprende',
+  path: '/aprende',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoNormasRoute = AlumnoNormasRouteImport.update({
+  id: '/normas',
+  path: '/normas',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoPepsRoute = AlumnoPepsRouteImport.update({
+  id: '/peps',
+  path: '/peps',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoPracticaRoute = AlumnoPracticaRouteImport.update({
+  id: '/practica',
+  path: '/practica',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoAprendeIndexRoute = AlumnoAprendeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AlumnoAprendeRoute,
+} as any)
+const AlumnoAprendeLeccionIdRoute = AlumnoAprendeLeccionIdRouteImport.update({
+  id: '/$leccionId',
+  path: '/$leccionId',
+  getParentRoute: () => AlumnoAprendeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
+  '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
+  '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
+  '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
+  '/alumno/aprende': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
+  '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
+  '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/alumno'
+    | '/alumno/almacena'
+    | '/alumno/aprende'
+    | '/alumno/normas'
+    | '/alumno/peps'
+    | '/alumno/practica'
+    | '/alumno/'
+    | '/alumno/aprende/$leccionId'
+    | '/alumno/aprende/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/alumno/almacena'
+    | '/alumno/normas'
+    | '/alumno/peps'
+    | '/alumno/practica'
+    | '/alumno'
+    | '/alumno/aprende/$leccionId'
+    | '/alumno/aprende'
+  id:
+    | '__root__'
+    | '/'
+    | '/alumno'
+    | '/alumno/almacena'
+    | '/alumno/aprende'
+    | '/alumno/normas'
+    | '/alumno/peps'
+    | '/alumno/practica'
+    | '/alumno/'
+    | '/alumno/aprende/$leccionId'
+    | '/alumno/aprende/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlumnoRoute: typeof AlumnoRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +157,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alumno': {
+      id: '/alumno'
+      path: '/alumno'
+      fullPath: '/alumno'
+      preLoaderRoute: typeof AlumnoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alumno/': {
+      id: '/alumno/'
+      path: '/'
+      fullPath: '/alumno/'
+      preLoaderRoute: typeof AlumnoIndexRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/almacena': {
+      id: '/alumno/almacena'
+      path: '/almacena'
+      fullPath: '/alumno/almacena'
+      preLoaderRoute: typeof AlumnoAlmacenaRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/aprende': {
+      id: '/alumno/aprende'
+      path: '/aprende'
+      fullPath: '/alumno/aprende'
+      preLoaderRoute: typeof AlumnoAprendeRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/normas': {
+      id: '/alumno/normas'
+      path: '/normas'
+      fullPath: '/alumno/normas'
+      preLoaderRoute: typeof AlumnoNormasRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/peps': {
+      id: '/alumno/peps'
+      path: '/peps'
+      fullPath: '/alumno/peps'
+      preLoaderRoute: typeof AlumnoPepsRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/practica': {
+      id: '/alumno/practica'
+      path: '/practica'
+      fullPath: '/alumno/practica'
+      preLoaderRoute: typeof AlumnoPracticaRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/aprende/': {
+      id: '/alumno/aprende/'
+      path: '/'
+      fullPath: '/alumno/aprende/'
+      preLoaderRoute: typeof AlumnoAprendeIndexRouteImport
+      parentRoute: typeof AlumnoAprendeRoute
+    }
+    '/alumno/aprende/$leccionId': {
+      id: '/alumno/aprende/$leccionId'
+      path: '/$leccionId'
+      fullPath: '/alumno/aprende/$leccionId'
+      preLoaderRoute: typeof AlumnoAprendeLeccionIdRouteImport
+      parentRoute: typeof AlumnoAprendeRoute
+    }
   }
 }
 
+interface AlumnoAprendeRouteChildren {
+  AlumnoAprendeLeccionIdRoute: typeof AlumnoAprendeLeccionIdRoute
+  AlumnoAprendeIndexRoute: typeof AlumnoAprendeIndexRoute
+}
+
+const AlumnoAprendeRouteChildren: AlumnoAprendeRouteChildren = {
+  AlumnoAprendeLeccionIdRoute: AlumnoAprendeLeccionIdRoute,
+  AlumnoAprendeIndexRoute: AlumnoAprendeIndexRoute,
+}
+
+const AlumnoAprendeRouteWithChildren = AlumnoAprendeRoute._addFileChildren(
+  AlumnoAprendeRouteChildren,
+)
+
+interface AlumnoRouteChildren {
+  AlumnoAlmacenaRoute: typeof AlumnoAlmacenaRoute
+  AlumnoAprendeRoute: typeof AlumnoAprendeRouteWithChildren
+  AlumnoNormasRoute: typeof AlumnoNormasRoute
+  AlumnoPepsRoute: typeof AlumnoPepsRoute
+  AlumnoPracticaRoute: typeof AlumnoPracticaRoute
+  AlumnoIndexRoute: typeof AlumnoIndexRoute
+}
+
+const AlumnoRouteChildren: AlumnoRouteChildren = {
+  AlumnoAlmacenaRoute: AlumnoAlmacenaRoute,
+  AlumnoAprendeRoute: AlumnoAprendeRouteWithChildren,
+  AlumnoNormasRoute: AlumnoNormasRoute,
+  AlumnoPepsRoute: AlumnoPepsRoute,
+  AlumnoPracticaRoute: AlumnoPracticaRoute,
+  AlumnoIndexRoute: AlumnoIndexRoute,
+}
+
+const AlumnoRouteWithChildren =
+  AlumnoRoute._addFileChildren(AlumnoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlumnoRoute: AlumnoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

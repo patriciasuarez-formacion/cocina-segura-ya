@@ -32,7 +32,13 @@ export function BotonModoApoyo() {
       variant={activo ? "default" : "outline"}
       aria-pressed={activo}
       onClick={() => cambiarAjuste("modoApoyo", !activo)}
-      className={cn("gap-2", activo && "bg-success text-success-foreground hover:bg-success/90")}
+      className={cn(
+        "gap-2",
+        activo
+          ? "bg-success text-success-foreground hover:bg-success/90"
+          : "bg-card text-foreground hover:bg-muted",
+      )}
+
     >
       <Sparkles aria-hidden className="size-4" />
       Modo de apoyo{activo ? ": activado" : ""}
@@ -66,7 +72,7 @@ export function PanelAccesibilidad() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button type="button" variant="outline" className="gap-2">
+        <Button type="button" variant="outline" className="gap-2 bg-card text-foreground hover:bg-muted">
           <Accessibility aria-hidden className="size-4" />
           <span className="hidden sm:inline">Accesibilidad</span>
         </Button>

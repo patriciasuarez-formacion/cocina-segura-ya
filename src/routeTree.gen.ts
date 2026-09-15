@@ -11,12 +11,24 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlumnoRouteImport } from './routes/alumno'
+import { Route as ProfesorRouteImport } from './routes/profesor'
 import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
 import { Route as AlumnoAlmacenaRouteImport } from './routes/alumno.almacena'
 import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
+import { Route as AlumnoEvaluacionRouteImport } from './routes/alumno.evaluacion'
+import { Route as AlumnoFichaRouteImport } from './routes/alumno.ficha'
 import { Route as AlumnoNormasRouteImport } from './routes/alumno.normas'
 import { Route as AlumnoPepsRouteImport } from './routes/alumno.peps'
 import { Route as AlumnoPracticaRouteImport } from './routes/alumno.practica'
+import { Route as AlumnoProgresoRouteImport } from './routes/alumno.progreso'
+import { Route as AlumnoSemaforoRouteImport } from './routes/alumno.semaforo'
+import { Route as ProfesorIndexRouteImport } from './routes/profesor.index'
+import { Route as ProfesorConfiguracionRouteImport } from './routes/profesor.configuracion'
+import { Route as ProfesorCotejoRouteImport } from './routes/profesor.cotejo'
+import { Route as ProfesorDemostracionRouteImport } from './routes/profesor.demostracion'
+import { Route as ProfesorFichasRouteImport } from './routes/profesor.fichas'
+import { Route as ProfesorGruposRouteImport } from './routes/profesor.grupos'
+import { Route as ProfesorResultadosRouteImport } from './routes/profesor.resultados'
 import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
 import { Route as AlumnoAprendeLeccionIdRouteImport } from './routes/alumno.aprende.$leccionId'
 
@@ -28,6 +40,11 @@ const IndexRoute = IndexRouteImport.update({
 const AlumnoRoute = AlumnoRouteImport.update({
   id: '/alumno',
   path: '/alumno',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfesorRoute = ProfesorRouteImport.update({
+  id: '/profesor',
+  path: '/profesor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
@@ -45,6 +62,16 @@ const AlumnoAprendeRoute = AlumnoAprendeRouteImport.update({
   path: '/aprende',
   getParentRoute: () => AlumnoRoute,
 } as any)
+const AlumnoEvaluacionRoute = AlumnoEvaluacionRouteImport.update({
+  id: '/evaluacion',
+  path: '/evaluacion',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoFichaRoute = AlumnoFichaRouteImport.update({
+  id: '/ficha',
+  path: '/ficha',
+  getParentRoute: () => AlumnoRoute,
+} as any)
 const AlumnoNormasRoute = AlumnoNormasRouteImport.update({
   id: '/normas',
   path: '/normas',
@@ -60,6 +87,51 @@ const AlumnoPracticaRoute = AlumnoPracticaRouteImport.update({
   path: '/practica',
   getParentRoute: () => AlumnoRoute,
 } as any)
+const AlumnoProgresoRoute = AlumnoProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoSemaforoRoute = AlumnoSemaforoRouteImport.update({
+  id: '/semaforo',
+  path: '/semaforo',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const ProfesorIndexRoute = ProfesorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorConfiguracionRoute = ProfesorConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorCotejoRoute = ProfesorCotejoRouteImport.update({
+  id: '/cotejo',
+  path: '/cotejo',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorDemostracionRoute = ProfesorDemostracionRouteImport.update({
+  id: '/demostracion',
+  path: '/demostracion',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorFichasRoute = ProfesorFichasRouteImport.update({
+  id: '/fichas',
+  path: '/fichas',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorGruposRoute = ProfesorGruposRouteImport.update({
+  id: '/grupos',
+  path: '/grupos',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorResultadosRoute = ProfesorResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
+  getParentRoute: () => ProfesorRoute,
+} as any)
 const AlumnoAprendeIndexRoute = AlumnoAprendeIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -74,22 +146,45 @@ const AlumnoAprendeLeccionIdRoute = AlumnoAprendeLeccionIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteWithChildren
+  '/profesor': typeof ProfesorRouteWithChildren
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/evaluacion': typeof AlumnoEvaluacionRoute
+  '/alumno/ficha': typeof AlumnoFichaRoute
   '/alumno/normas': typeof AlumnoNormasRoute
   '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno/progreso': typeof AlumnoProgresoRoute
+  '/alumno/semaforo': typeof AlumnoSemaforoRoute
+  '/profesor/configuracion': typeof ProfesorConfiguracionRoute
+  '/profesor/cotejo': typeof ProfesorCotejoRoute
+  '/profesor/demostracion': typeof ProfesorDemostracionRoute
+  '/profesor/fichas': typeof ProfesorFichasRoute
+  '/profesor/grupos': typeof ProfesorGruposRoute
+  '/profesor/resultados': typeof ProfesorResultadosRoute
   '/alumno/': typeof AlumnoIndexRoute
+  '/profesor/': typeof ProfesorIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/evaluacion': typeof AlumnoEvaluacionRoute
+  '/alumno/ficha': typeof AlumnoFichaRoute
   '/alumno/normas': typeof AlumnoNormasRoute
   '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno/progreso': typeof AlumnoProgresoRoute
+  '/alumno/semaforo': typeof AlumnoSemaforoRoute
+  '/profesor/configuracion': typeof ProfesorConfiguracionRoute
+  '/profesor/cotejo': typeof ProfesorCotejoRoute
+  '/profesor/demostracion': typeof ProfesorDemostracionRoute
+  '/profesor/fichas': typeof ProfesorFichasRoute
+  '/profesor/grupos': typeof ProfesorGruposRoute
+  '/profesor/resultados': typeof ProfesorResultadosRoute
   '/alumno': typeof AlumnoIndexRoute
+  '/profesor': typeof ProfesorIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende': typeof AlumnoAprendeIndexRoute
 }
@@ -97,12 +192,24 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteWithChildren
+  '/profesor': typeof ProfesorRouteWithChildren
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/evaluacion': typeof AlumnoEvaluacionRoute
+  '/alumno/ficha': typeof AlumnoFichaRoute
   '/alumno/normas': typeof AlumnoNormasRoute
   '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
+  '/alumno/progreso': typeof AlumnoProgresoRoute
+  '/alumno/semaforo': typeof AlumnoSemaforoRoute
+  '/profesor/configuracion': typeof ProfesorConfiguracionRoute
+  '/profesor/cotejo': typeof ProfesorCotejoRoute
+  '/profesor/demostracion': typeof ProfesorDemostracionRoute
+  '/profesor/fichas': typeof ProfesorFichasRoute
+  '/profesor/grupos': typeof ProfesorGruposRoute
+  '/profesor/resultados': typeof ProfesorResultadosRoute
   '/alumno/': typeof AlumnoIndexRoute
+  '/profesor/': typeof ProfesorIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
@@ -111,34 +218,69 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alumno'
+    | '/profesor'
     | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/evaluacion'
+    | '/alumno/ficha'
     | '/alumno/normas'
     | '/alumno/peps'
     | '/alumno/practica'
+    | '/alumno/progreso'
+    | '/alumno/semaforo'
+    | '/profesor/configuracion'
+    | '/profesor/cotejo'
+    | '/profesor/demostracion'
+    | '/profesor/fichas'
+    | '/profesor/grupos'
+    | '/profesor/resultados'
     | '/alumno/'
+    | '/profesor/'
     | '/alumno/aprende/$leccionId'
     | '/alumno/aprende/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/alumno/almacena'
+    | '/alumno/evaluacion'
+    | '/alumno/ficha'
     | '/alumno/normas'
     | '/alumno/peps'
     | '/alumno/practica'
+    | '/alumno/progreso'
+    | '/alumno/semaforo'
+    | '/profesor/configuracion'
+    | '/profesor/cotejo'
+    | '/profesor/demostracion'
+    | '/profesor/fichas'
+    | '/profesor/grupos'
+    | '/profesor/resultados'
     | '/alumno'
+    | '/profesor'
     | '/alumno/aprende/$leccionId'
     | '/alumno/aprende'
   id:
     | '__root__'
     | '/'
     | '/alumno'
+    | '/profesor'
     | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/evaluacion'
+    | '/alumno/ficha'
     | '/alumno/normas'
     | '/alumno/peps'
     | '/alumno/practica'
+    | '/alumno/progreso'
+    | '/alumno/semaforo'
+    | '/profesor/configuracion'
+    | '/profesor/cotejo'
+    | '/profesor/demostracion'
+    | '/profesor/fichas'
+    | '/profesor/grupos'
+    | '/profesor/resultados'
     | '/alumno/'
+    | '/profesor/'
     | '/alumno/aprende/$leccionId'
     | '/alumno/aprende/'
   fileRoutesById: FileRoutesById
@@ -146,6 +288,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlumnoRoute: typeof AlumnoRouteWithChildren
+  ProfesorRoute: typeof ProfesorRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -162,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/alumno'
       fullPath: '/alumno'
       preLoaderRoute: typeof AlumnoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profesor': {
+      id: '/profesor'
+      path: '/profesor'
+      fullPath: '/profesor'
+      preLoaderRoute: typeof ProfesorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/alumno/': {
@@ -185,6 +335,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoAprendeRouteImport
       parentRoute: typeof AlumnoRoute
     }
+    '/alumno/evaluacion': {
+      id: '/alumno/evaluacion'
+      path: '/evaluacion'
+      fullPath: '/alumno/evaluacion'
+      preLoaderRoute: typeof AlumnoEvaluacionRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/ficha': {
+      id: '/alumno/ficha'
+      path: '/ficha'
+      fullPath: '/alumno/ficha'
+      preLoaderRoute: typeof AlumnoFichaRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
     '/alumno/normas': {
       id: '/alumno/normas'
       path: '/normas'
@@ -205,6 +369,69 @@ declare module '@tanstack/react-router' {
       fullPath: '/alumno/practica'
       preLoaderRoute: typeof AlumnoPracticaRouteImport
       parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/progreso': {
+      id: '/alumno/progreso'
+      path: '/progreso'
+      fullPath: '/alumno/progreso'
+      preLoaderRoute: typeof AlumnoProgresoRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/semaforo': {
+      id: '/alumno/semaforo'
+      path: '/semaforo'
+      fullPath: '/alumno/semaforo'
+      preLoaderRoute: typeof AlumnoSemaforoRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/profesor/': {
+      id: '/profesor/'
+      path: '/'
+      fullPath: '/profesor/'
+      preLoaderRoute: typeof ProfesorIndexRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/configuracion': {
+      id: '/profesor/configuracion'
+      path: '/configuracion'
+      fullPath: '/profesor/configuracion'
+      preLoaderRoute: typeof ProfesorConfiguracionRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/cotejo': {
+      id: '/profesor/cotejo'
+      path: '/cotejo'
+      fullPath: '/profesor/cotejo'
+      preLoaderRoute: typeof ProfesorCotejoRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/demostracion': {
+      id: '/profesor/demostracion'
+      path: '/demostracion'
+      fullPath: '/profesor/demostracion'
+      preLoaderRoute: typeof ProfesorDemostracionRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/fichas': {
+      id: '/profesor/fichas'
+      path: '/fichas'
+      fullPath: '/profesor/fichas'
+      preLoaderRoute: typeof ProfesorFichasRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/grupos': {
+      id: '/profesor/grupos'
+      path: '/grupos'
+      fullPath: '/profesor/grupos'
+      preLoaderRoute: typeof ProfesorGruposRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/resultados': {
+      id: '/profesor/resultados'
+      path: '/resultados'
+      fullPath: '/profesor/resultados'
+      preLoaderRoute: typeof ProfesorResultadosRouteImport
+      parentRoute: typeof ProfesorRoute
     }
     '/alumno/aprende/': {
       id: '/alumno/aprende/'
@@ -240,27 +467,60 @@ const AlumnoAprendeRouteWithChildren = AlumnoAprendeRoute._addFileChildren(
 interface AlumnoRouteChildren {
   AlumnoAlmacenaRoute: typeof AlumnoAlmacenaRoute
   AlumnoAprendeRoute: typeof AlumnoAprendeRouteWithChildren
+  AlumnoEvaluacionRoute: typeof AlumnoEvaluacionRoute
+  AlumnoFichaRoute: typeof AlumnoFichaRoute
   AlumnoNormasRoute: typeof AlumnoNormasRoute
   AlumnoPepsRoute: typeof AlumnoPepsRoute
   AlumnoPracticaRoute: typeof AlumnoPracticaRoute
+  AlumnoProgresoRoute: typeof AlumnoProgresoRoute
+  AlumnoSemaforoRoute: typeof AlumnoSemaforoRoute
   AlumnoIndexRoute: typeof AlumnoIndexRoute
 }
 
 const AlumnoRouteChildren: AlumnoRouteChildren = {
   AlumnoAlmacenaRoute: AlumnoAlmacenaRoute,
   AlumnoAprendeRoute: AlumnoAprendeRouteWithChildren,
+  AlumnoEvaluacionRoute: AlumnoEvaluacionRoute,
+  AlumnoFichaRoute: AlumnoFichaRoute,
   AlumnoNormasRoute: AlumnoNormasRoute,
   AlumnoPepsRoute: AlumnoPepsRoute,
   AlumnoPracticaRoute: AlumnoPracticaRoute,
+  AlumnoProgresoRoute: AlumnoProgresoRoute,
+  AlumnoSemaforoRoute: AlumnoSemaforoRoute,
   AlumnoIndexRoute: AlumnoIndexRoute,
 }
 
 const AlumnoRouteWithChildren =
   AlumnoRoute._addFileChildren(AlumnoRouteChildren)
 
+interface ProfesorRouteChildren {
+  ProfesorConfiguracionRoute: typeof ProfesorConfiguracionRoute
+  ProfesorCotejoRoute: typeof ProfesorCotejoRoute
+  ProfesorDemostracionRoute: typeof ProfesorDemostracionRoute
+  ProfesorFichasRoute: typeof ProfesorFichasRoute
+  ProfesorGruposRoute: typeof ProfesorGruposRoute
+  ProfesorResultadosRoute: typeof ProfesorResultadosRoute
+  ProfesorIndexRoute: typeof ProfesorIndexRoute
+}
+
+const ProfesorRouteChildren: ProfesorRouteChildren = {
+  ProfesorConfiguracionRoute: ProfesorConfiguracionRoute,
+  ProfesorCotejoRoute: ProfesorCotejoRoute,
+  ProfesorDemostracionRoute: ProfesorDemostracionRoute,
+  ProfesorFichasRoute: ProfesorFichasRoute,
+  ProfesorGruposRoute: ProfesorGruposRoute,
+  ProfesorResultadosRoute: ProfesorResultadosRoute,
+  ProfesorIndexRoute: ProfesorIndexRoute,
+}
+
+const ProfesorRouteWithChildren = ProfesorRoute._addFileChildren(
+  ProfesorRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlumnoRoute: AlumnoRouteWithChildren,
+  ProfesorRoute: ProfesorRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

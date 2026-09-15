@@ -12,10 +12,10 @@ export function ZonaAlmacen({
 }: {
   zona: Zona;
   children?: React.ReactNode;
-  resaltada?: boolean;
-  onSoltar?: () => void;
-  onClick?: () => void;
-  seleccionable?: boolean;
+  resaltada?: boolean | undefined;
+  onSoltar?: (() => void) | undefined;
+  onClick?: (() => void) | undefined;
+  seleccionable?: boolean | undefined;
 }) {
   const Icono = iconoZona(zona.icono);
   const Contenedor = seleccionable ? "button" : "div";

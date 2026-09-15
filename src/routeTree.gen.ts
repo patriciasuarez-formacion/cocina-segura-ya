@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlumnoRouteImport } from './routes/alumno'
 import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
+import { Route as AlumnoAlmacenaRouteImport } from './routes/alumno.almacena'
 import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
+import { Route as AlumnoPracticaRouteImport } from './routes/alumno.practica'
 import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
 import { Route as AlumnoAprendeLeccionIdRouteImport } from './routes/alumno.aprende.$leccionId'
 
@@ -31,9 +33,19 @@ const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AlumnoRoute,
 } as any)
+const AlumnoAlmacenaRoute = AlumnoAlmacenaRouteImport.update({
+  id: '/almacena',
+  path: '/almacena',
+  getParentRoute: () => AlumnoRoute,
+} as any)
 const AlumnoAprendeRoute = AlumnoAprendeRouteImport.update({
   id: '/aprende',
   path: '/aprende',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoPracticaRoute = AlumnoPracticaRouteImport.update({
+  id: '/practica',
+  path: '/practica',
   getParentRoute: () => AlumnoRoute,
 } as any)
 const AlumnoAprendeIndexRoute = AlumnoAprendeIndexRouteImport.update({
@@ -50,13 +62,17 @@ const AlumnoAprendeLeccionIdRoute = AlumnoAprendeLeccionIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno/': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende': typeof AlumnoAprendeIndexRoute
@@ -65,7 +81,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno/': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
@@ -75,17 +93,27 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alumno'
+    | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/practica'
     | '/alumno/'
     | '/alumno/aprende/$leccionId'
     | '/alumno/aprende/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alumno' | '/alumno/aprende/$leccionId' | '/alumno/aprende'
+  to:
+    | '/'
+    | '/alumno/almacena'
+    | '/alumno/practica'
+    | '/alumno'
+    | '/alumno/aprende/$leccionId'
+    | '/alumno/aprende'
   id:
     | '__root__'
     | '/'
     | '/alumno'
+    | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/practica'
     | '/alumno/'
     | '/alumno/aprende/$leccionId'
     | '/alumno/aprende/'
@@ -119,11 +147,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoIndexRouteImport
       parentRoute: typeof AlumnoRoute
     }
+    '/alumno/almacena': {
+      id: '/alumno/almacena'
+      path: '/almacena'
+      fullPath: '/alumno/almacena'
+      preLoaderRoute: typeof AlumnoAlmacenaRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
     '/alumno/aprende': {
       id: '/alumno/aprende'
       path: '/aprende'
       fullPath: '/alumno/aprende'
       preLoaderRoute: typeof AlumnoAprendeRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/practica': {
+      id: '/alumno/practica'
+      path: '/practica'
+      fullPath: '/alumno/practica'
+      preLoaderRoute: typeof AlumnoPracticaRouteImport
       parentRoute: typeof AlumnoRoute
     }
     '/alumno/aprende/': {
@@ -158,12 +200,16 @@ const AlumnoAprendeRouteWithChildren = AlumnoAprendeRoute._addFileChildren(
 )
 
 interface AlumnoRouteChildren {
+  AlumnoAlmacenaRoute: typeof AlumnoAlmacenaRoute
   AlumnoAprendeRoute: typeof AlumnoAprendeRouteWithChildren
+  AlumnoPracticaRoute: typeof AlumnoPracticaRoute
   AlumnoIndexRoute: typeof AlumnoIndexRoute
 }
 
 const AlumnoRouteChildren: AlumnoRouteChildren = {
+  AlumnoAlmacenaRoute: AlumnoAlmacenaRoute,
   AlumnoAprendeRoute: AlumnoAprendeRouteWithChildren,
+  AlumnoPracticaRoute: AlumnoPracticaRoute,
   AlumnoIndexRoute: AlumnoIndexRoute,
 }
 

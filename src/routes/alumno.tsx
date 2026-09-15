@@ -12,7 +12,7 @@ export const Route = createFileRoute("/alumno")({
   component: LayoutAlumno,
 });
 
-const SECCIONES = [
+const SECCIONES: { to: string; etiqueta: string; exacto?: boolean }[] = [
   { to: "/alumno", etiqueta: "Inicio", exacto: true },
   { to: "/alumno/aprende", etiqueta: "Aprende" },
   { to: "/alumno/practica", etiqueta: "Practica" },
@@ -23,7 +23,7 @@ const SECCIONES = [
   { to: "/alumno/ficha", etiqueta: "Ficha de recepción" },
   { to: "/alumno/evaluacion", etiqueta: "Evaluación" },
   { to: "/alumno/progreso", etiqueta: "Mi progreso" },
-] as const;
+];
 
 function LayoutAlumno() {
   const estado = useEstado();

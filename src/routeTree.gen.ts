@@ -14,6 +14,8 @@ import { Route as AlumnoRouteImport } from './routes/alumno'
 import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
 import { Route as AlumnoAlmacenaRouteImport } from './routes/alumno.almacena'
 import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
+import { Route as AlumnoNormasRouteImport } from './routes/alumno.normas'
+import { Route as AlumnoPepsRouteImport } from './routes/alumno.peps'
 import { Route as AlumnoPracticaRouteImport } from './routes/alumno.practica'
 import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
 import { Route as AlumnoAprendeLeccionIdRouteImport } from './routes/alumno.aprende.$leccionId'
@@ -43,6 +45,16 @@ const AlumnoAprendeRoute = AlumnoAprendeRouteImport.update({
   path: '/aprende',
   getParentRoute: () => AlumnoRoute,
 } as any)
+const AlumnoNormasRoute = AlumnoNormasRouteImport.update({
+  id: '/normas',
+  path: '/normas',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoPepsRoute = AlumnoPepsRouteImport.update({
+  id: '/peps',
+  path: '/peps',
+  getParentRoute: () => AlumnoRoute,
+} as any)
 const AlumnoPracticaRoute = AlumnoPracticaRouteImport.update({
   id: '/practica',
   path: '/practica',
@@ -64,6 +76,8 @@ export interface FileRoutesByFullPath {
   '/alumno': typeof AlumnoRouteWithChildren
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno/': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
@@ -72,6 +86,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
@@ -83,6 +99,8 @@ export interface FileRoutesById {
   '/alumno': typeof AlumnoRouteWithChildren
   '/alumno/almacena': typeof AlumnoAlmacenaRoute
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/normas': typeof AlumnoNormasRoute
+  '/alumno/peps': typeof AlumnoPepsRoute
   '/alumno/practica': typeof AlumnoPracticaRoute
   '/alumno/': typeof AlumnoIndexRoute
   '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
@@ -95,6 +113,8 @@ export interface FileRouteTypes {
     | '/alumno'
     | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/normas'
+    | '/alumno/peps'
     | '/alumno/practica'
     | '/alumno/'
     | '/alumno/aprende/$leccionId'
@@ -103,6 +123,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/alumno/almacena'
+    | '/alumno/normas'
+    | '/alumno/peps'
     | '/alumno/practica'
     | '/alumno'
     | '/alumno/aprende/$leccionId'
@@ -113,6 +135,8 @@ export interface FileRouteTypes {
     | '/alumno'
     | '/alumno/almacena'
     | '/alumno/aprende'
+    | '/alumno/normas'
+    | '/alumno/peps'
     | '/alumno/practica'
     | '/alumno/'
     | '/alumno/aprende/$leccionId'
@@ -161,6 +185,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoAprendeRouteImport
       parentRoute: typeof AlumnoRoute
     }
+    '/alumno/normas': {
+      id: '/alumno/normas'
+      path: '/normas'
+      fullPath: '/alumno/normas'
+      preLoaderRoute: typeof AlumnoNormasRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/peps': {
+      id: '/alumno/peps'
+      path: '/peps'
+      fullPath: '/alumno/peps'
+      preLoaderRoute: typeof AlumnoPepsRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
     '/alumno/practica': {
       id: '/alumno/practica'
       path: '/practica'
@@ -202,6 +240,8 @@ const AlumnoAprendeRouteWithChildren = AlumnoAprendeRoute._addFileChildren(
 interface AlumnoRouteChildren {
   AlumnoAlmacenaRoute: typeof AlumnoAlmacenaRoute
   AlumnoAprendeRoute: typeof AlumnoAprendeRouteWithChildren
+  AlumnoNormasRoute: typeof AlumnoNormasRoute
+  AlumnoPepsRoute: typeof AlumnoPepsRoute
   AlumnoPracticaRoute: typeof AlumnoPracticaRoute
   AlumnoIndexRoute: typeof AlumnoIndexRoute
 }
@@ -209,6 +249,8 @@ interface AlumnoRouteChildren {
 const AlumnoRouteChildren: AlumnoRouteChildren = {
   AlumnoAlmacenaRoute: AlumnoAlmacenaRoute,
   AlumnoAprendeRoute: AlumnoAprendeRouteWithChildren,
+  AlumnoNormasRoute: AlumnoNormasRoute,
+  AlumnoPepsRoute: AlumnoPepsRoute,
   AlumnoPracticaRoute: AlumnoPracticaRoute,
   AlumnoIndexRoute: AlumnoIndexRoute,
 }

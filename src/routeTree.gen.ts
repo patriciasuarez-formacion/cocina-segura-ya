@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlumnoRouteImport } from './routes/alumno'
+import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
+import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
+import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +25,60 @@ const AlumnoRoute = AlumnoRouteImport.update({
   path: '/alumno',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlumnoIndexRoute = AlumnoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoAprendeRoute = AlumnoAprendeRouteImport.update({
+  id: '/aprende',
+  path: '/aprende',
+  getParentRoute: () => AlumnoRoute,
+} as any)
+const AlumnoAprendeIndexRoute = AlumnoAprendeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AlumnoAprendeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/alumno': typeof AlumnoRoute
+  '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/alumno': typeof AlumnoRoute
+  '/alumno': typeof AlumnoIndexRoute
+  '/alumno/aprende': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/alumno': typeof AlumnoRoute
+  '/alumno': typeof AlumnoRouteWithChildren
+  '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
+  '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/alumno'
+  fullPaths:
+    '/' | '/alumno' | '/alumno/aprende' | '/alumno/' | '/alumno/aprende/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alumno'
-  id: '__root__' | '/' | '/alumno'
+  to: '/' | '/alumno' | '/alumno/aprende'
+  id:
+    | '__root__'
+    | '/'
+    | '/alumno'
+    | '/alumno/aprende'
+    | '/alumno/'
+    | '/alumno/aprende/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AlumnoRoute: typeof AlumnoRoute
+  AlumnoRoute: typeof AlumnoRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +97,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alumno/': {
+      id: '/alumno/'
+      path: '/'
+      fullPath: '/alumno/'
+      preLoaderRoute: typeof AlumnoIndexRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/aprende': {
+      id: '/alumno/aprende'
+      path: '/aprende'
+      fullPath: '/alumno/aprende'
+      preLoaderRoute: typeof AlumnoAprendeRouteImport
+      parentRoute: typeof AlumnoRoute
+    }
+    '/alumno/aprende/': {
+      id: '/alumno/aprende/'
+      path: '/'
+      fullPath: '/alumno/aprende/'
+      preLoaderRoute: typeof AlumnoAprendeIndexRouteImport
+      parentRoute: typeof AlumnoAprendeRoute
+    }
   }
 }
 
+interface AlumnoAprendeRouteChildren {
+  AlumnoAprendeIndexRoute: typeof AlumnoAprendeIndexRoute
+}
+
+const AlumnoAprendeRouteChildren: AlumnoAprendeRouteChildren = {
+  AlumnoAprendeIndexRoute: AlumnoAprendeIndexRoute,
+}
+
+const AlumnoAprendeRouteWithChildren = AlumnoAprendeRoute._addFileChildren(
+  AlumnoAprendeRouteChildren,
+)
+
+interface AlumnoRouteChildren {
+  AlumnoAprendeRoute: typeof AlumnoAprendeRouteWithChildren
+  AlumnoIndexRoute: typeof AlumnoIndexRoute
+}
+
+const AlumnoRouteChildren: AlumnoRouteChildren = {
+  AlumnoAprendeRoute: AlumnoAprendeRouteWithChildren,
+  AlumnoIndexRoute: AlumnoIndexRoute,
+}
+
+const AlumnoRouteWithChildren =
+  AlumnoRoute._addFileChildren(AlumnoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AlumnoRoute: AlumnoRoute,
+  AlumnoRoute: AlumnoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

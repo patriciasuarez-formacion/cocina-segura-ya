@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export const ICONOS_LECCION: Record<string, LucideIcon> = {
+const LECCION: Record<string, LucideIcon> = {
   caja: Box,
   calendario: CalendarDays,
   termometro: Thermometer,
@@ -22,10 +22,18 @@ export const ICONOS_LECCION: Record<string, LucideIcon> = {
   albaran: ClipboardList,
 };
 
-export const ICONOS_ZONA: Record<string, LucideIcon> = {
+const ZONA: Record<string, LucideIcon> = {
   refrigeracion: Refrigerator,
   congelador: Snowflake,
   seco: Package,
   frutas: Apple,
   limpieza: SprayCan,
 };
+
+export function iconoLeccion(clave: string): LucideIcon {
+  return LECCION[clave] ?? Box;
+}
+
+export function iconoZona(clave: string): LucideIcon {
+  return ZONA[clave] ?? Package;
+}

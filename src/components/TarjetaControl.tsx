@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CheckCircle2 } from "lucide-react";
-import { ICONOS_LECCION } from "@/components/iconos";
+import { iconoLeccion } from "@/components/iconos";
 import type { Leccion } from "@/data/lecciones";
 
 export function TarjetaControl({
@@ -10,7 +10,7 @@ export function TarjetaControl({
   leccion: Leccion;
   completada: boolean;
 }) {
-  const Icono = ICONOS_LECCION[leccion.icono];
+  const Icono = iconoLeccion(leccion.icono);
   return (
     <Link
       to="/alumno/aprende/$leccionId"

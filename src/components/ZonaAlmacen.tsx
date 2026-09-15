@@ -1,4 +1,4 @@
-import { ICONOS_ZONA } from "@/components/iconos";
+import { iconoZona } from "@/components/iconos";
 import { cn } from "@/lib/utils";
 import type { Zona } from "@/data/zonas";
 
@@ -17,7 +17,7 @@ export function ZonaAlmacen({
   onClick?: () => void;
   seleccionable?: boolean;
 }) {
-  const Icono = ICONOS_ZONA[zona.icono];
+  const Icono = iconoZona(zona.icono);
   const Contenedor = seleccionable ? "button" : "div";
   return (
     <Contenedor

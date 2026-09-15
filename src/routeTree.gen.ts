@@ -14,6 +14,7 @@ import { Route as AlumnoRouteImport } from './routes/alumno'
 import { Route as AlumnoIndexRouteImport } from './routes/alumno.index'
 import { Route as AlumnoAprendeRouteImport } from './routes/alumno.aprende'
 import { Route as AlumnoAprendeIndexRouteImport } from './routes/alumno.aprende.index'
+import { Route as AlumnoAprendeLeccionIdRouteImport } from './routes/alumno.aprende.$leccionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,17 +41,24 @@ const AlumnoAprendeIndexRoute = AlumnoAprendeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AlumnoAprendeRoute,
 } as any)
+const AlumnoAprendeLeccionIdRoute = AlumnoAprendeLeccionIdRouteImport.update({
+  id: '/$leccionId',
+  path: '/$leccionId',
+  getParentRoute: () => AlumnoAprendeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoRouteWithChildren
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
   '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alumno': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRoutesById {
@@ -59,20 +67,27 @@ export interface FileRoutesById {
   '/alumno': typeof AlumnoRouteWithChildren
   '/alumno/aprende': typeof AlumnoAprendeRouteWithChildren
   '/alumno/': typeof AlumnoIndexRoute
+  '/alumno/aprende/$leccionId': typeof AlumnoAprendeLeccionIdRoute
   '/alumno/aprende/': typeof AlumnoAprendeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/alumno' | '/alumno/aprende' | '/alumno/' | '/alumno/aprende/'
+    | '/'
+    | '/alumno'
+    | '/alumno/aprende'
+    | '/alumno/'
+    | '/alumno/aprende/$leccionId'
+    | '/alumno/aprende/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alumno' | '/alumno/aprende'
+  to: '/' | '/alumno' | '/alumno/aprende/$leccionId' | '/alumno/aprende'
   id:
     | '__root__'
     | '/'
     | '/alumno'
     | '/alumno/aprende'
     | '/alumno/'
+    | '/alumno/aprende/$leccionId'
     | '/alumno/aprende/'
   fileRoutesById: FileRoutesById
 }
@@ -118,14 +133,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoAprendeIndexRouteImport
       parentRoute: typeof AlumnoAprendeRoute
     }
+    '/alumno/aprende/$leccionId': {
+      id: '/alumno/aprende/$leccionId'
+      path: '/$leccionId'
+      fullPath: '/alumno/aprende/$leccionId'
+      preLoaderRoute: typeof AlumnoAprendeLeccionIdRouteImport
+      parentRoute: typeof AlumnoAprendeRoute
+    }
   }
 }
 
 interface AlumnoAprendeRouteChildren {
+  AlumnoAprendeLeccionIdRoute: typeof AlumnoAprendeLeccionIdRoute
   AlumnoAprendeIndexRoute: typeof AlumnoAprendeIndexRoute
 }
 
 const AlumnoAprendeRouteChildren: AlumnoAprendeRouteChildren = {
+  AlumnoAprendeLeccionIdRoute: AlumnoAprendeLeccionIdRoute,
   AlumnoAprendeIndexRoute: AlumnoAprendeIndexRoute,
 }
 
